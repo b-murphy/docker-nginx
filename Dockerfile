@@ -11,8 +11,7 @@ RUN ln -s /etc/nginx/sites-available/app /etc/nginx/sites-enabled/app
 ENV NGINX_RUN_USER www-data
 ENV NGINX_RUN_GROUP www-data
 ENV NGINX_LOG_DIR /var/log/nginx
-ENV NGINX_BACKEND_IP 172.17.42.1
-ENV NGINX_BACKEND_PORT 80
+ENV NGINX_BACKEND_IP_PORT 172.17.42.1:80
 ENV NGINX_SERVER_NAME localhost
 
 EXPOSE 80
