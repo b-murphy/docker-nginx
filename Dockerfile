@@ -6,8 +6,6 @@ RUN apt-get update -qq && apt-get -y install nginx
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 RUN mkdir /etc/nginx/ssl
 ADD default /etc/nginx/sites-available/default
-ADD default-ssl /etc/nginx/sites-available/default-ssl
-
 
 ADD default /etc/nginx/sites-available/
 RUN ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
