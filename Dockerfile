@@ -14,6 +14,8 @@ ENV NGINX_LOG_DIR /var/log/nginx
 ENV NGINX_BACKEND_IP_PORT 172.17.42.1:80
 ENV NGINX_SERVER_NAME localhost
 
+ENV TEST_NAME go figure
+
 EXPOSE 80
 
 CMD ["nginx"]

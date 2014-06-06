@@ -1,3 +1,5 @@
+env TEST_NAME
+
 upstream app  {
       server ${NGINX_BACKEND_IP_PORT} weight=10 max_fails=3 fail_timeout=30s;
 }
