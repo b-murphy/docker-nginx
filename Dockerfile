@@ -4,11 +4,9 @@ MAINTAINER  Brendan Murphy
 RUN apt-get update -qq && apt-get -y install nginx
 
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
-RUN mkdir /etc/nginx/ssl
-ADD default /etc/nginx/sites-available/default
 
-ADD default /etc/nginx/sites-available/
-RUN ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+ADD app /etc/nginx/sites-available/
+RUN ln -s /etc/nginx/sites-available/app /etc/nginx/sites-enabled/app
 
 ENV NGINX_RUN_USER www-data
 ENV NGINX_RUN_GROUP www-data
