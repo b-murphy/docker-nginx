@@ -1,20 +1,26 @@
 FROM ubuntu
 MAINTAINER  Brendan Murphy
- 
-RUN apt-get update -qq && apt-get -y install nginx
+
+# ruby dependencies
+RUN apt-get update -qq
+RUN apt-get install -y build-essential libpq-dev openssl curl nginx
+RUN \curl -L https://github.com/sstephenson/ruby-build/archive/v20140524.tar.gz | tar -zxvf - -C /tmp/
+
+# Install ruby-build
+RUN cd /tmp/ruby-build-* && ./install.sh && cd / && rm -rfv /tmp/ruby-build-master
+
+# Install ruby
+RUN ruby-build -v 2.1.5  /usr/local
+
+# Install gems
+RUN gem install bundler rubygems-bundler --no-rdoc --no-ri
+
+# Regenerate binstubs
+RUN gem regenerate_binstubs
 
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
-ADD app /etc/nginx/sites-available/
-RUN ln -s /etc/nginx/sites-available/app /etc/nginx/sites-enabled/app
 
-ENV NGINX_RUN_USER www-data
-ENV NGINX_RUN_GROUP www-data
-ENV NGINX_LOG_DIR /var/log/nginx
-ENV NGINX_BACKEND_IP_PORT 172.17.42.1:80
-ENV NGINX_SERVER_NAME localhost
-
-ENV TEST_NAME go figure
 
 EXPOSE 80
 
